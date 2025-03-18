@@ -1,8 +1,120 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { addReservation } from "../scripts/api";
+import { createUseStyles } from "react-jss";
+import { Link } from "react-router-dom";
+
+const useStyles = createUseStyles({
+  body: {
+    fontFamily: "'Comic Sans MS', cursive, sans-serif",
+    margin: 0,
+    minHeight: "100vh",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    textAlign: "center",
+    color: "white",
+    background: "linear-gradient(to bottom, #e73348 20%, #811c28cc 80%)",
+    backgroundSize: "cover",
+    backgroundBlendMode: "overlay",
+    backgroundPosition: "fixed",
+    position: "relative",
+  },
+  container: {
+    display: "flex",
+    flexDirection: "column",
+    width: "100%",
+    minHeight: "100vh",
+    fontSize: "1.2rem",
+  },
+  row: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    color: "white",
+    fontSize: "1.5rem",
+  },
+  smallRow: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    padding: "10px",
+  },
+  left: {
+    padding: "10px",
+    backgroundColor: "#ffffff",
+    borderRadius: "8px",
+    "& img": {
+      maxWidth: "100%",
+      height: "auto",
+      maxHeight: "100px",
+      borderRadius: "8px",
+    },
+  },
+  center: {
+    paddingLeft: "2vw",
+    paddingRight: "2vw",
+    fontSize: "1.5rem",
+  },
+  right: {
+    display: "flex",
+    flexDirection: "row",
+    gap: "20px",
+    "& button": {
+      padding: "10px 20px",
+      backgroundColor: "white",
+      color: "black",
+      border: "none",
+      borderRadius: "20px",
+      cursor: "pointer",
+      fontSize: "1rem",
+      transition: "background-color 0.3s ease",
+      "&:hover": {
+        backgroundColor: "#811C28",
+        color: "white",
+      },
+    },
+  },
+  largeRow: {
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
+    gap: "20px",
+    padding: "20px",
+  },
+  reservationForm: {
+    display: "flex",
+    flexDirection: "column",
+    gap: "15px",
+    width: "100%",
+    maxWidth: "500px",
+    margin: "0 auto",
+    "& label": {
+      fontSize: "1rem",
+      fontWeight: "bold",
+      marginBottom: "5px",
+    },
+    "& input, & select, & button": {
+      padding: "10px",
+      fontSize: "1rem",
+      border: "1px solid #ccc",
+      borderRadius: "5px",
+      width: "100%",
+    },
+    "& button": {
+      backgroundColor: "#811C28",
+      color: "white",
+      cursor: "pointer",
+      transition: "background-color 0.3s ease",
+      "&:hover": {
+        backgroundColor: "#e73348",
+      },
+    },
+  },
+});
 
 const AddReservation = () => {
+  const classes = useStyles();
   const [formData, setFormData] = useState({
     name: "",
     location: "",
@@ -35,25 +147,25 @@ const AddReservation = () => {
   };
 
   return (
-    <div className="container">
-      <div className="row small">
-        <div className="left">
+    <div className={classes.container}>
+      <div className={`${classes.row} ${classes.smallRow}`}>
+        <div className={classes.left}>
           <Link to="/userDashboard">
             <img src="/public/assets/logo.png" alt="Rover4Me" />
           </Link>
         </div>
-        <div className="center">
+        <div className={classes.center}>
           <h1>Dodaj nową rezerwację</h1>
         </div>
-        <div className="right">
+        <div className={classes.right}>
           <Link to="/userDashboard">
             <button>Wróć do panelu</button>
           </Link>
         </div>
       </div>
 
-      <div className="row large">
-        <form onSubmit={handleSubmit} className="reservation-form">
+      <div className={`${classes.row} ${classes.largeRow}`}>
+        <form onSubmit={handleSubmit} className={classes.reservationForm}>
           <label htmlFor="name">Nazwa:</label>
           <input type="text" id="name" name="name" value={formData.name} onChange={handleChange} required />
 

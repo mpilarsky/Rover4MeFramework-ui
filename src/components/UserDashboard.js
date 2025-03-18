@@ -1,8 +1,136 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { getReservations } from "../scripts/api";
+import { createUseStyles } from "react-jss";
+
+const useStyles = createUseStyles({
+  body: {
+    fontFamily: "'Comic Sans MS', cursive, sans-serif",
+    margin: 0,
+    minHeight: "100vh",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    textAlign: "center",
+    color: "white",
+    background: "linear-gradient(to bottom, #e73348 20%, #811c28cc 80%)",
+    backgroundSize: "cover",
+    backgroundBlendMode: "overlay",
+    backgroundPosition: "fixed",
+    position: "relative",
+  },
+  container: {
+    display: "flex",
+    flexDirection: "column",
+    width: "100%",
+    minHeight: "100vh",
+    fontSize: "1.2rem",
+  },
+  row: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    color: "white",
+    fontSize: "1.5rem",
+  },
+  smallRow: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    padding: "10px",
+  },
+  left: {
+    padding: "10px",
+    backgroundColor: "#ffffff",
+    borderRadius: "8px",
+    "& img": {
+      maxWidth: "100%",
+      height: "auto",
+      maxHeight: "100px",
+      borderRadius: "8px",
+    },
+  },
+  center: {
+    paddingLeft: "2vw",
+    paddingRight: "2vw",
+    fontSize: "1.5rem",
+  },
+  right: {
+    display: "flex",
+    flexDirection: "row",
+    gap: "20px",
+    "& button": {
+      padding: "10px 20px",
+      backgroundColor: "white",
+      color: "black",
+      border: "none",
+      borderRadius: "20px",
+      cursor: "pointer",
+      fontSize: "1rem",
+      transition: "background-color 0.3s ease",
+      "&:hover": {
+        backgroundColor: "#811C28",
+        color: "white",
+      },
+    },
+  },
+  largeRow: {
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
+    gap: "20px",
+    padding: "20px",
+  },
+  reservationCard: {
+    display: "none",
+    minWidth: "300px",
+    maxWidth: "300px",
+    backgroundColor: "rgba(255, 255, 255, 0.9)",
+    color: "black",
+    borderRadius: "10px",
+    margin: "10px",
+    padding: "15px",
+    textAlign: "center",
+    boxShadow: "0 4px 10px rgba(0, 0, 0, 0.3)",
+    flex: "0 0 auto",
+    marginRight: "20px",
+    "&.active": {
+      display: "block",
+    },
+    "& img": {
+      maxWidth: "100%",
+      maxHeight: "100%",
+      objectFit: "contain",
+      borderRadius: "8px",
+    },
+  },
+  addReservationContainer: {
+    textAlign: "center",
+    margin: "20px 0",
+  },
+  btnAddReservation: {
+    display: "inline-block",
+    padding: "10px 20px",
+    fontSize: "16px",
+    color: "#fff",
+    backgroundColor: "#007bff",
+    border: "none",
+    borderRadius: "5px",
+    cursor: "pointer",
+    transition: "background-color 0.3s ease, transform 0.2s ease",
+    "&:hover": {
+      backgroundColor: "#0056b3",
+      transform: "scale(1.05)",
+    },
+    "&:active": {
+      backgroundColor: "#004494",
+      transform: "scale(0.95)",
+    },
+  },
+});
 
 const UserDashboard = () => {
+  const classes = useStyles();
   const [reservations, setReservations] = useState([]);
 
   useEffect(() => {
@@ -12,23 +140,23 @@ const UserDashboard = () => {
   }, []);
 
   return (
-    <div className="container">
-      <div className="row small">
-        <div className="left">
+    <div className={classes.container}>
+      <div className={`${classes.row} ${classes.smallRow}`}>
+        <div className={classes.left}>
           <Link to="/userDashboard">
             <img src="/public/assets/logo.png" alt="Rover4Me" />
           </Link>
         </div>
-        <div className="center">
+        <div className={classes.center}>
           <p>Witaj w swoim panelu użytkownika, tu znajdziesz szczegóły swoich rezerwacji rowerów.</p>
         </div>
-        <div className="right">
-          <div className="add-reservation-container">
-            <Link to="/addReservation" className="btn-add-reservation">
+        <div className={classes.right}>
+          <div className={classes.addReservationContainer}>
+            <Link to="/addReservation" className={classes.btnAddReservation}>
               <button>Dodaj nową rezerwację</button>
             </Link>
           </div>
-          <div className="add-reservation-container">
+          <div className={classes.addReservationContainer}>
             <form action="/logout" method="POST" style={{ display: "inline" }}>
               <button type="submit">Wyloguj się</button>
             </form>
@@ -36,7 +164,7 @@ const UserDashboard = () => {
         </div>
       </div>
 
-      <div className="row large">
+      <div className={`${classes.row} ${classes.largeRow}`}>
         {reservations.length === 0 ? (
           <p>Brak rezerwacji do wyświetlenia.</p>
         ) : (
@@ -49,7 +177,7 @@ const UserDashboard = () => {
             }[reservation.bike_type];
 
             return (
-              <div key={index} className="reservation-card">
+              <div key={index} className={`${classes.reservationCard} active`}>
                 <h3>Nazwa: {reservation.name}</h3>
                 <p>Lokalizacja: {reservation.location}</p>
                 <p>Wielkość ramy: {reservation.frame_size}</p>
