@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { createUseStyles } from "react-jss";
 import { loginUser } from "../utils/api";
 
@@ -26,7 +26,7 @@ const useStyles = createUseStyles({
       left: 0,
       width: "100%",
       height: "100%",
-      background: "url('../assets/background.jpg') center/cover no-repeat",
+      background: "url('public/assets/background.jpg') center/cover no-repeat",
       opacity: 0.2,
       zIndex: -1,
     },
@@ -170,13 +170,14 @@ function Login() {
   const classes = useStyles();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const success = await loginUser(email, password);
+    const credentials = { email, password };
+    const success = await loginUser(credentials);
     if (success) {
-      history.push("/user-dashboard");
+      navigate("/userDashboard");
     } else {
       alert("Logowanie nieudane");
     }
@@ -187,7 +188,7 @@ function Login() {
       <div className={`${classes.row} small`}>
         <div className="left">
           <Link to="/">
-            <img src="public/assets/logo.png" alt="Rover4Me" />
+            <img src="../../assets/logo.png" alt="Rover4Me" />
           </Link>
         </div>
         <div className="center">

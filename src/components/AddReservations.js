@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
-import { addReservation } from "../scripts/api";
+import { Navigate, useNavigation } from "react-router-dom";
+import { addReservation } from "../utils/api";
 import { createUseStyles } from "react-jss";
 import { Link } from "react-router-dom";
 
@@ -126,7 +126,7 @@ const AddReservation = () => {
     bike_type: "Górski",
   });
 
-  const history = useHistory();
+  const navigate = useNavigation();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -140,7 +140,7 @@ const AddReservation = () => {
     e.preventDefault();
     try {
       await addReservation(formData);
-      history.push("/userDashboard");
+      navigate("/userDashboard");
     } catch (error) {
       console.error("Błąd przy dodawaniu rezerwacji:", error);
     }

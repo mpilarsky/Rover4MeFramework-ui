@@ -69,8 +69,8 @@ export const loginUser = async (credentials) => {
  * @param {Object} userData - Dane nowego użytkownika.
  * @returns {Promise<Object>}
  */
-export const registerUser = async (userData) => {
-  const response = await fetch(`${API_BASE_URL}/signup`, {
+export const signupUser = async (userData) => {
+  const response = await fetch(`http://localhost:8000/api/signup`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

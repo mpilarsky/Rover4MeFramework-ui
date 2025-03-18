@@ -4,7 +4,7 @@ import Dashboard from "./components/Dashboard";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
 import UserDashboard from "./components/UserDashboard";
-import AddReservation from "./components/AddReservation";
+import AddReservation from "./components/AddReservations";
 
 const App = () => {
   return (
@@ -15,7 +15,7 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/userDashboard" element={<UserDashboard />} />
-        <Route path="/addReservation" element={<AddReservation />} />
+        <Route path="/addReservations" element={<AddReservation />} />
       </Routes>
     </Router>
   );

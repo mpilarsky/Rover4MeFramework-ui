@@ -3,6 +3,34 @@ import { Link } from "react-router-dom";
 import { createUseStyles } from "react-jss";
 
 const useStyles = createUseStyles({
+  body: {
+    fontFamily: "'Comic Sans MS', cursive, sans-serif",
+    margin: 0,
+    minHeight: "100vh",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    textAlign: "center",
+    color: "white",
+    background: "linear-gradient(to bottom, #e73348 20%, #811c28cc 80%)",
+    backgroundSize: "cover",
+    backgroundBlendMode: "overlay",
+    backgroundPosition: "fixed",
+    position: "relative",
+    "&::before": {
+      content: '""',
+      position: "absolute",
+      top: 0,
+      left: 0,
+      width: "100%",
+      height: "100%",
+      background: "url('public/assets/background.jpg') center/cover no-repeat",
+      opacity: 0.2,
+      zIndex: -1,
+    },
+  },
+
   container: {
     display: "flex",
     flexDirection: "column",
@@ -19,6 +47,7 @@ const useStyles = createUseStyles({
     fontSize: "1.5rem",
 
     "&.small": {
+      display: "flex",
       justifyContent: "space-between",
       alignItems: "center",
       padding: "10px",
@@ -103,6 +132,10 @@ const useStyles = createUseStyles({
   },
 
   "@media (max-width: 768px)": {
+    body: {
+      backgroundAttachment: "scroll",
+    },
+
     ".row.small .center": {
       padding: "0 5vw",
     },
@@ -114,7 +147,7 @@ const useStyles = createUseStyles({
 
   "@media (max-width: 480px)": {
     ".row.small .center": {
-      fontSize: "0rem",
+      fontSize: "0rem", // Ukrycie tekstu na telefonach
     },
   },
 });

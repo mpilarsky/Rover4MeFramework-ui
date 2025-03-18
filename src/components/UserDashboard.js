@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { getReservations } from "../scripts/api";
+import { getReservations } from "../utils/api";
 import { createUseStyles } from "react-jss";
 
 const useStyles = createUseStyles({
@@ -152,7 +152,7 @@ const UserDashboard = () => {
         </div>
         <div className={classes.right}>
           <div className={classes.addReservationContainer}>
-            <Link to="/addReservation" className={classes.btnAddReservation}>
+            <Link to="/addReservations" className={classes.btnAddReservation}>
               <button>Dodaj nową rezerwację</button>
             </Link>
           </div>

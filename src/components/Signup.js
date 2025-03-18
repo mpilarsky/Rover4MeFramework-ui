@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { signupUser } from '../utils/api';
 import { createUseStyles } from 'react-jss';
 
@@ -26,7 +26,7 @@ const useStyles = createUseStyles({
       left: 0,
       width: '100%',
       height: '100%',
-      background: 'url("../assets/background.jpg") center/cover no-repeat',
+      background: 'url("/public/assets/background.jpg") center/cover no-repeat',
       opacity: 0.2,
       zIndex: -1,
     },
@@ -153,7 +153,7 @@ function Signup() {
   const classes = useStyles();
   const [formData, setFormData] = useState({ name: '', surname: '', age: '', email: '', password: '' });
   const [termsAccepted, setTermsAccepted] = useState(false);
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -165,7 +165,7 @@ function Signup() {
     if (termsAccepted) {
       const success = await signupUser(formData);
       if (success) {
-        history.push('/login');
+        navigate('/login');
       } else {
         alert('Rejestracja nieudana');
       }
@@ -176,7 +176,7 @@ function Signup() {
     <div className={classes.body}>
       <div className={`${classes.container} ${classes.row} ${classes.smallRow}`}>
         <div className={classes.left}>
-          <Link to="/"><img src="public/assets/logo.png" alt="Rover4Me" /></Link>
+          <Link to="/"><img src="../public/assets/logo.png" alt="Rover4Me" /></Link>
         </div>
         <div className={classes.center}>
           <p>Rover4Me to aplikacja, która pozwoli ci na szybkie wynajęcie roweru...</p>
