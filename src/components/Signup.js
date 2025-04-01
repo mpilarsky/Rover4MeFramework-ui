@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { signupUser } from "../utils/api";
 import { createUseStyles } from "react-jss";
-import logo from "../assets/logo.png"; // Poprawiony import logo
+import logo from "../assets/logo.png";
 
 const useStyles = createUseStyles({
   body: {
