@@ -1,4 +1,4 @@
-const API_BASE_URL = "/api";
+const API_BASE_URL = "http://localhost:8000/api";
 
 /**
  * Pobiera listę użytkowników.
@@ -70,7 +70,7 @@ export const loginUser = async (credentials) => {
  * @returns {Promise<Object>}
  */
 export const signupUser = async (userData) => {
-  const response = await fetch(`http://localhost:8000/api/signup`, {
+  const response = await fetch(`${API_BASE_URL}/signup`, {  // Użycie API_BASE_URL
     method: "POST",
     headers: {
       "Content-Type": "application/json",
