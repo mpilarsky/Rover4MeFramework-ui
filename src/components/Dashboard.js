@@ -25,7 +25,7 @@ const useStyles = createUseStyles({
       left: 0,
       width: "100%",
       height: "100%",
-      background: "url('public/assets/background.jpg') center/cover no-repeat",
+      background: "url('/assets/background.jpg') center/cover no-repeat",
       opacity: 0.2,
       zIndex: -1,
     },
@@ -136,7 +136,7 @@ const useStyles = createUseStyles({
       backgroundAttachment: "scroll",
     },
 
-    ".row.small .center": {
+    rowSmallCenter: {
       padding: "0 5vw",
     },
 
@@ -146,8 +146,8 @@ const useStyles = createUseStyles({
   },
 
   "@media (max-width: 480px)": {
-    ".row.small .center": {
-      fontSize: "0rem", // Ukrycie tekstu na telefonach
+    rowSmallCenter: {
+      display: "none",
     },
   },
 });
@@ -159,10 +159,10 @@ function Dashboard() {
     <div className={classes.container}>
       <div className={`${classes.row} small`}>
         <div className="left">
-          <img src="public/assets/logo.png" alt="Rover4Me" />
+          <img src="/assets/logo.png" alt="Rover4Me" />
         </div>
-        <div className="center">
-          <p>Rover4Me to aplikacja która pozwoli ci na szybkie wynajęcie roweru...</p>
+        <div className={classes.rowSmallCenter}>
+          <p>Rover4Me to aplikacja, która pozwoli ci na szybkie wynajęcie roweru...</p>
         </div>
         <div className="right">
           <Link to="/login"><button>Logowanie</button></Link>
@@ -171,15 +171,15 @@ function Dashboard() {
       </div>
       <div className={`${classes.row} large`}>
         <div className={classes.tile}>
-          <img src="public/assets/tile1.png" alt="Opis 1" />
+          <img src="/assets/tile1.png" alt="Opis 1" />
           <p>Zarejestruj się</p>
         </div>
         <div className={classes.tile}>
-          <img src="public/assets/tile2.png" alt="Opis 2" />
+          <img src="/assets/tile2.png" alt="Opis 2" />
           <p>Dokonaj rezerwacji</p>
         </div>
         <div className={classes.tile}>
-          <img src="public/assets/tile3.png" alt="Opis 3" />
+          <img src="/assets/tile3.png" alt="Opis 3" />
           <p>Śmigaj do celu</p>
         </div>
       </div>

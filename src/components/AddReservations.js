@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Navigate, useNavigation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { addReservation } from "../utils/api";
 import { createUseStyles } from "react-jss";
 import { Link } from "react-router-dom";
@@ -20,7 +20,19 @@ const useStyles = createUseStyles({
     backgroundBlendMode: "overlay",
     backgroundPosition: "fixed",
     position: "relative",
+    "&::before": {
+      content: '""',
+      position: "absolute",
+      top: 0,
+      left: 0,
+      width: "100%",
+      height: "100%",
+      background: "url('/assets/background.jpg') center/cover no-repeat",
+      opacity: 0.2,
+      zIndex: -1,
+    },
   },
+
   container: {
     display: "flex",
     flexDirection: "column",
@@ -28,6 +40,7 @@ const useStyles = createUseStyles({
     minHeight: "100vh",
     fontSize: "1.2rem",
   },
+
   row: {
     display: "flex",
     alignItems: "center",
@@ -35,12 +48,14 @@ const useStyles = createUseStyles({
     color: "white",
     fontSize: "1.5rem",
   },
+
   smallRow: {
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
     padding: "10px",
   },
+
   left: {
     padding: "10px",
     backgroundColor: "#ffffff",
@@ -52,11 +67,13 @@ const useStyles = createUseStyles({
       borderRadius: "8px",
     },
   },
+
   center: {
     paddingLeft: "2vw",
     paddingRight: "2vw",
     fontSize: "1.5rem",
   },
+
   right: {
     display: "flex",
     flexDirection: "row",
@@ -76,12 +93,14 @@ const useStyles = createUseStyles({
       },
     },
   },
+
   largeRow: {
     display: "grid",
     gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
     gap: "20px",
     padding: "20px",
   },
+
   reservationForm: {
     display: "flex",
     flexDirection: "column",
@@ -126,7 +145,7 @@ const AddReservation = () => {
     bike_type: "Górski",
   });
 
-  const navigate = useNavigation();
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -151,7 +170,7 @@ const AddReservation = () => {
       <div className={`${classes.row} ${classes.smallRow}`}>
         <div className={classes.left}>
           <Link to="/userDashboard">
-            <img src="/public/assets/logo.png" alt="Rover4Me" />
+            <img src="/assets/logo.png" alt="Rover4Me" />
           </Link>
         </div>
         <div className={classes.center}>
@@ -206,3 +225,5 @@ const AddReservation = () => {
 };
 
 export default AddReservation;
+// Compare this snippet from src/utils/api.js:
+// import axios from "axios";
