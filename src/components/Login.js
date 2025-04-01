@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { createUseStyles } from "react-jss";
 import { loginUser } from "../utils/api";
+import logo from "../assets/logo.png"; // Poprawiony import logo
 
 const useStyles = createUseStyles({
   body: {
@@ -26,7 +27,7 @@ const useStyles = createUseStyles({
       left: 0,
       width: "100%",
       height: "100%",
-      background: "url('public/assets/background.jpg') center/cover no-repeat",
+      background: "url('/assets/background.jpg') center/cover no-repeat",
       opacity: 0.2,
       zIndex: -1,
     },
@@ -188,7 +189,7 @@ function Login() {
       <div className={`${classes.row} small`}>
         <div className="left">
           <Link to="/">
-            <img src="../../assets/logo.png" alt="Rover4Me" />
+            <img src={logo} alt="Rover4Me" />
           </Link>
         </div>
         <div className="center">
@@ -231,3 +232,5 @@ function Login() {
 }
 
 export default Login;
+// Compare this snippet from src/utils/api.js:
+// import axios from "axios";
