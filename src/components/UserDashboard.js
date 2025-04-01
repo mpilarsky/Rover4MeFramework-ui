@@ -60,20 +60,6 @@ const useStyles = createUseStyles({
     display: "flex",
     flexDirection: "row",
     gap: "20px",
-    "& button": {
-      padding: "10px 20px",
-      backgroundColor: "white",
-      color: "black",
-      border: "none",
-      borderRadius: "20px",
-      cursor: "pointer",
-      fontSize: "1rem",
-      transition: "background-color 0.3s ease",
-      "&:hover": {
-        backgroundColor: "#811C28",
-        color: "white",
-      },
-    },
   },
   largeRow: {
     display: "grid",
@@ -82,7 +68,6 @@ const useStyles = createUseStyles({
     padding: "20px",
   },
   reservationCard: {
-    display: "none",
     minWidth: "300px",
     maxWidth: "300px",
     backgroundColor: "rgba(255, 255, 255, 0.9)",
@@ -93,10 +78,6 @@ const useStyles = createUseStyles({
     textAlign: "center",
     boxShadow: "0 4px 10px rgba(0, 0, 0, 0.3)",
     flex: "0 0 auto",
-    marginRight: "20px",
-    "&.active": {
-      display: "block",
-    },
     "& img": {
       maxWidth: "100%",
       maxHeight: "100%",
@@ -109,7 +90,6 @@ const useStyles = createUseStyles({
     margin: "20px 0",
   },
   btnAddReservation: {
-    display: "inline-block",
     padding: "10px 20px",
     fontSize: "16px",
     color: "#fff",
@@ -144,7 +124,7 @@ const UserDashboard = () => {
       <div className={`${classes.row} ${classes.smallRow}`}>
         <div className={classes.left}>
           <Link to="/userDashboard">
-            <img src="/public/assets/logo.png" alt="Rover4Me" />
+            <img src={`${process.env.PUBLIC_URL}/assets/logo.png`} alt="Rover4Me" />
           </Link>
         </div>
         <div className={classes.center}>
@@ -152,8 +132,8 @@ const UserDashboard = () => {
         </div>
         <div className={classes.right}>
           <div className={classes.addReservationContainer}>
-            <Link to="/addReservations" className={classes.btnAddReservation}>
-              <button>Dodaj nową rezerwację</button>
+            <Link to="/addReservations">
+              <button className={classes.btnAddReservation}>Dodaj nową rezerwację</button>
             </Link>
           </div>
           <div className={classes.addReservationContainer}>
@@ -174,17 +154,17 @@ const UserDashboard = () => {
               Elektryczny: 2,
               Górski: 3,
               Miejski: 4,
-            }[reservation.bike_type];
+            }[reservation.bike_type] || 0; // Domyślnie 0, jeśli brak dopasowania
 
             return (
-              <div key={index} className={`${classes.reservationCard} active`}>
+              <div key={index} className={classes.reservationCard}>
                 <h3>Nazwa: {reservation.name}</h3>
                 <p>Lokalizacja: {reservation.location}</p>
                 <p>Wielkość ramy: {reservation.frame_size}</p>
                 <p>Motyw: {reservation.theme}</p>
                 <p>Typ roweru: {reservation.bike_type}</p>
                 <img
-                  src={`/public/assets/bike${bikeTypeValue}.png`}
+                  src={`${process.env.PUBLIC_URL}/assets/bike${bikeTypeValue}.png`}
                   alt={`Rower typu ${reservation.bike_type}`}
                 />
                 <p>
@@ -201,3 +181,5 @@ const UserDashboard = () => {
 };
 
 export default UserDashboard;
+// Note: Ensure that the bike images are named correctly and placed in the assets folder as per the bikeTypeValue mapping.
+// The bike images should be named bike1.png, bike2.png, etc., corresponding to the bike types. 
