@@ -158,7 +158,13 @@ const AddReservation = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await addReservation(formData);
+      const userId = localStorage.getItem("user_id"); // albo inny sposób pobierania usera
+      const reservationData = {
+        ...formData,
+        user_id: userId,
+        reservation_date: formData.date, // backend oczekuje `reservation_date`
+      };
+      await addReservation(reservationData);
       navigate("/userDashboard");
     } catch (error) {
       console.error("Błąd przy dodawaniu rezerwacji:", error);

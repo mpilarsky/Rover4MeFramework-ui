@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { getReservations } from "../utils/api";
+import { getReservations, logoutUser } from "../utils/api";
 import { createUseStyles } from "react-jss";
 
 const useStyles = createUseStyles({
@@ -91,19 +92,41 @@ const useStyles = createUseStyles({
   },
   btnAddReservation: {
     padding: "10px 20px",
-    fontSize: "16px",
-    color: "#fff",
-    backgroundColor: "#007bff",
+    backgroundColor: "white",
+    color: "black",
     border: "none",
-    borderRadius: "5px",
+    borderRadius: "20px",
     cursor: "pointer",
-    transition: "background-color 0.3s ease, transform 0.2s ease",
+    fontSize: "16px",
+    transition: "background-color 0.3s ease, color 0.3s ease",
+
     "&:hover": {
-      backgroundColor: "#0056b3",
-      transform: "scale(1.05)",
+      backgroundColor: "#811C28",
+      color: "white",
     },
+
     "&:active": {
-      backgroundColor: "#004494",
+      backgroundColor: "#5f141f",
+      transform: "scale(0.95)",
+    },
+  },
+  btnLogout: {  // jeśli masz osobny przycisk wyloguj się
+    padding: "10px 20px",
+    backgroundColor: "white",
+    color: "black",
+    border: "none",
+    borderRadius: "20px",
+    cursor: "pointer",
+    fontSize: "16px",
+    transition: "background-color 0.3s ease, color 0.3s ease",
+
+    "&:hover": {
+      backgroundColor: "#811C28",
+      color: "white",
+    },
+
+    "&:active": {
+      backgroundColor: "#5f141f",
       transform: "scale(0.95)",
     },
   },
@@ -118,6 +141,17 @@ const UserDashboard = () => {
       .then((data) => setReservations(data))
       .catch((error) => console.error("Błąd pobierania rezerwacji:", error));
   }, []);
+
+  const navigate = useNavigate(); // z react-router-dom
+
+  const handleLogout = async () => {
+    try {
+      await logoutUser(); // wywołanie fetch na /api/logout
+      navigate("/login"); // przekierowanie po wylogowaniu
+    } catch (error) {
+      console.error("Błąd przy wylogowaniu:", error);
+    }
+  };
 
   return (
     <div className={classes.body}>
@@ -138,9 +172,7 @@ const UserDashboard = () => {
               </Link>
             </div>
             <div className={classes.addReservationContainer}>
-              <form action="/logout" method="POST" style={{ display: "inline" }}>
-                <button type="submit">Wyloguj się</button>
-              </form>
+              <button className={classes.btnLogout} onClick={handleLogout}>Wyloguj się</button>
             </div>
           </div>
         </div>

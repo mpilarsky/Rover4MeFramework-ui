@@ -17,12 +17,15 @@ export const getUsers = async () => {
  * @returns {Promise<Array>}
  */
 export const getReservations = async () => {
-  const response = await fetch(`${API_BASE_URL}/reservations`);
+  const response = await fetch(`${API_BASE_URL}/reservations`, {
+    credentials: 'include', // <--- to jest kluczowe, żeby backend dostał sesję
+  });
   if (!response.ok) {
     throw new Error("Błąd pobierania rezerwacji");
   }
   return response.json();
 };
+
 
 /**
  * Dodaje nową rezerwację.
@@ -52,6 +55,7 @@ export const addReservation = async (reservationData) => {
 export const loginUser = async (credentials) => {
   const response = await fetch(`${API_BASE_URL}/login`, {
     method: "POST",
+    credentials: 'include',
     headers: {
       "Content-Type": "application/json",
     },
@@ -61,7 +65,9 @@ export const loginUser = async (credentials) => {
   if (!response.ok) {
     throw new Error("Błędne dane logowania");
   }
-  return response.json();
+  const userData = await response.json();
+  localStorage.setItem("user_id", userData.id); // <-- zapisujemy ID użytkownika
+  return userData;
 };
 
 /**
@@ -91,9 +97,12 @@ export const signupUser = async (userData) => {
 export const logoutUser = async () => {
   const response = await fetch(`${API_BASE_URL}/logout`, {
     method: "POST",
+    credentials: "include", // ważne przy użyciu sesji
   });
 
   if (!response.ok) {
     throw new Error("Błąd podczas wylogowywania");
   }
+
+  localStorage.removeItem("user_id"); // lub cokolwiek trzymasz lokalnie
 };
