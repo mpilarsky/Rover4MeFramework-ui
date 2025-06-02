@@ -120,61 +120,63 @@ const UserDashboard = () => {
   }, []);
 
   return (
-    <div className={classes.container}>
-      <div className={`${classes.row} ${classes.smallRow}`}>
-        <div className={classes.left}>
-          <Link to="/userDashboard">
-            <img src={`${process.env.PUBLIC_URL}/assets/logo.png`} alt="Rover4Me" />
-          </Link>
-        </div>
-        <div className={classes.center}>
-          <p>Witaj w swoim panelu użytkownika, tu znajdziesz szczegóły swoich rezerwacji rowerów.</p>
-        </div>
-        <div className={classes.right}>
-          <div className={classes.addReservationContainer}>
-            <Link to="/addReservations">
-              <button className={classes.btnAddReservation}>Dodaj nową rezerwację</button>
+    <div className={classes.body}>
+      <div className={classes.container}>
+        <div className={`${classes.row} ${classes.smallRow}`}>
+          <div className={classes.left}>
+            <Link to="/userDashboard">
+              <img src={`${process.env.PUBLIC_URL}/assets/logo.png`} alt="Rover4Me" />
             </Link>
           </div>
-          <div className={classes.addReservationContainer}>
-            <form action="/logout" method="POST" style={{ display: "inline" }}>
-              <button type="submit">Wyloguj się</button>
-            </form>
+          <div className={classes.center}>
+            <p>Witaj w swoim panelu użytkownika, tu znajdziesz szczegóły swoich rezerwacji rowerów.</p>
+          </div>
+          <div className={classes.right}>
+            <div className={classes.addReservationContainer}>
+              <Link to="/addReservations">
+                <button className={classes.btnAddReservation}>Dodaj nową rezerwację</button>
+              </Link>
+            </div>
+            <div className={classes.addReservationContainer}>
+              <form action="/logout" method="POST" style={{ display: "inline" }}>
+                <button type="submit">Wyloguj się</button>
+              </form>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div className={`${classes.row} ${classes.largeRow}`}>
-        {reservations.length === 0 ? (
-          <p>Brak rezerwacji do wyświetlenia.</p>
-        ) : (
-          reservations.map((reservation, index) => {
-            const bikeTypeValue = {
-              Trekkingowy: 1,
-              Elektryczny: 2,
-              Górski: 3,
-              Miejski: 4,
-            }[reservation.bike_type] || 0; // Domyślnie 0, jeśli brak dopasowania
+        <div className={`${classes.row} ${classes.largeRow}`}>
+          {reservations.length === 0 ? (
+            <p>Brak rezerwacji do wyświetlenia.</p>
+          ) : (
+            reservations.map((reservation, index) => {
+              const bikeTypeValue = {
+                Trekkingowy: 1,
+                Elektryczny: 2,
+                Górski: 3,
+                Miejski: 4,
+              }[reservation.bike_type] || 0; // Domyślnie 0, jeśli brak dopasowania
 
-            return (
-              <div key={index} className={classes.reservationCard}>
-                <h3>Nazwa: {reservation.name}</h3>
-                <p>Lokalizacja: {reservation.location}</p>
-                <p>Wielkość ramy: {reservation.frame_size}</p>
-                <p>Motyw: {reservation.theme}</p>
-                <p>Typ roweru: {reservation.bike_type}</p>
-                <img
-                  src={`${process.env.PUBLIC_URL}/assets/bike${bikeTypeValue}.png`}
-                  alt={`Rower typu ${reservation.bike_type}`}
-                />
-                <p>
-                  Start: {reservation.reservation_date} o godzinie {reservation.start_time}
-                </p>
-                <p>Koniec: {reservation.end_time}</p>
-              </div>
-            );
-          })
-        )}
+              return (
+                <div key={index} className={classes.reservationCard}>
+                  <h3>Nazwa: {reservation.name}</h3>
+                  <p>Lokalizacja: {reservation.location}</p>
+                  <p>Wielkość ramy: {reservation.frame_size}</p>
+                  <p>Motyw: {reservation.theme}</p>
+                  <p>Typ roweru: {reservation.bike_type}</p>
+                  <img
+                    src={`${process.env.PUBLIC_URL}/assets/bike${bikeTypeValue}.png`}
+                    alt={`Rower typu ${reservation.bike_type}`}
+                  />
+                  <p>
+                    Start: {reservation.reservation_date} o godzinie {reservation.start_time}
+                  </p>
+                  <p>Koniec: {reservation.end_time}</p>
+                </div>
+              );
+            })
+          )}
+        </div>
       </div>
     </div>
   );

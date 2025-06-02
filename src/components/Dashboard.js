@@ -156,31 +156,33 @@ function Dashboard() {
   const classes = useStyles();
 
   return (
-    <div className={classes.container}>
-      <div className={`${classes.row} small`}>
-        <div className="left">
-          <img src="/assets/logo.png" alt="Rover4Me" />
+    <div className={classes.body}>
+      <div className={classes.container}>
+        <div className={`${classes.row} small`}>
+          <div className="left">
+            <img src="/assets/logo.png" alt="Rover4Me" />
+          </div>
+          <div className={classes.rowSmallCenter}>
+            <p>Rover4Me to aplikacja, która pozwoli ci na szybkie wynajęcie roweru...</p>
+          </div>
+          <div className="right">
+            <Link to="/login"><button>Logowanie</button></Link>
+            <Link to="/signup"><button>Rejestracja</button></Link>
+          </div>
         </div>
-        <div className={classes.rowSmallCenter}>
-          <p>Rover4Me to aplikacja, która pozwoli ci na szybkie wynajęcie roweru...</p>
-        </div>
-        <div className="right">
-          <Link to="/login"><button>Logowanie</button></Link>
-          <Link to="/signup"><button>Rejestracja</button></Link>
-        </div>
-      </div>
-      <div className={`${classes.row} large`}>
-        <div className={classes.tile}>
-          <img src="/assets/tile1.png" alt="Opis 1" />
-          <p>Zarejestruj się</p>
-        </div>
-        <div className={classes.tile}>
-          <img src="/assets/tile2.png" alt="Opis 2" />
-          <p>Dokonaj rezerwacji</p>
-        </div>
-        <div className={classes.tile}>
-          <img src="/assets/tile3.png" alt="Opis 3" />
-          <p>Śmigaj do celu</p>
+        <div className={`${classes.row} large`}>
+          <div className={classes.tile}>
+            <img src="/assets/tile1.png" alt="Opis 1" />
+            <p>Zarejestruj się</p>
+          </div>
+          <div className={classes.tile}>
+            <img src="/assets/tile2.png" alt="Opis 2" />
+            <p>Dokonaj rezerwacji</p>
+          </div>
+          <div className={classes.tile}>
+            <img src="/assets/tile3.png" alt="Opis 3" />
+            <p>Śmigaj do celu</p>
+          </div>
         </div>
       </div>
     </div>

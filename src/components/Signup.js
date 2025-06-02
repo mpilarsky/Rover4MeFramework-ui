@@ -107,12 +107,16 @@ const useStyles = createUseStyles({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
+    justifyContent: "center",
     backgroundColor: "rgba(255, 255, 255, 0.9)",
     borderRadius: 12,
     padding: 30,
     width: "100%",
     maxWidth: 400,
     boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
+    margin: "0 auto",
+    boxSizing: "border-box",
+    textAlign: "left",
   },
 
   formTitle: {
@@ -199,47 +203,49 @@ function Signup() {
 
   return (
     <div className={classes.body}>
-      <div className={`${classes.container} ${classes.row} ${classes.smallRow}`}>
-        <div className={classes.left}>
-          <Link to="/">
-            <img src={logo} alt="Rover4Me" />
-          </Link>
-        </div>
-        <div className={classes.center}>
-          <p>Rover4Me to aplikacja, która pozwoli ci na szybkie wynajęcie roweru...</p>
-        </div>
-        <div className={classes.right}>
-          <Link to="/login">
-            <button className={classes.button}>Logowanie</button>
-          </Link>
-        </div>
-      </div>
-      <div className={`${classes.container} ${classes.row} ${classes.largeRow}`}>
-        <form className={classes.form} onSubmit={handleSubmit}>
-          <h2 className={classes.formTitle}>Rejestracja</h2>
-
-          <label className={classes.label} htmlFor="name">Imię:</label>
-          <input className={classes.input} type="text" id="name" name="name" value={formData.name} onChange={handleChange} required />
-
-          <label className={classes.label} htmlFor="surname">Nazwisko:</label>
-          <input className={classes.input} type="text" id="surname" name="surname" value={formData.surname} onChange={handleChange} required />
-
-          <label className={classes.label} htmlFor="age">Wiek:</label>
-          <input className={classes.input} type="number" id="age" name="age" value={formData.age} onChange={handleChange} min="18" required />
-
-          <label className={classes.label} htmlFor="email">Email:</label>
-          <input className={classes.input} type="email" id="email" name="email" value={formData.email} onChange={handleChange} required />
-
-          <label className={classes.label} htmlFor="password">Hasło:</label>
-          <input className={classes.input} type="password" id="password" name="password" value={formData.password} onChange={handleChange} required />
-
-          <div className={classes.checkboxContainer}>
-            <input type="checkbox" id="terms" name="terms" onChange={() => setTermsAccepted(!termsAccepted)} required />
-            <label htmlFor="terms">Akceptuję regulamin</label>
+      <div className={classes.container}>
+        <div className={`${classes.row} small`}>
+          <div className={classes.left}>
+            <Link to="/">
+              <img src={logo} alt="Rover4Me" />
+            </Link>
           </div>
+          <div className={classes.center}>
+            <p>Rover4Me to aplikacja, która pozwoli ci na szybkie wynajęcie roweru...</p>
+          </div>
+          <div className={classes.right}>
+            <Link to="/login">
+              <button className={classes.button}>Logowanie</button>
+            </Link>
+          </div>
+        </div>
+        <div className={`${classes.row} ${classes.largeRow}`}>
+          <form className={classes.form} onSubmit={handleSubmit}>
+            <h2 className={classes.formTitle}>Rejestracja</h2>
 
-          <button className={classes.button} type="submit" disabled={!termsAccepted}>Zarejestruj</button>
-        </form>
+            <label className={classes.label} htmlFor="name">Imię:</label>
+            <input className={classes.input} type="text" id="name" name="name" value={formData.name} onChange={handleChange} required />
+
+            <label className={classes.label} htmlFor="surname">Nazwisko:</label>
+            <input className={classes.input} type="text" id="surname" name="surname" value={formData.surname} onChange={handleChange} required />
+
+            <label className={classes.label} htmlFor="age">Wiek:</label>
+            <input className={classes.input} type="number" id="age" name="age" value={formData.age} onChange={handleChange} min="18" required />
+
+            <label className={classes.label} htmlFor="email">Email:</label>
+            <input className={classes.input} type="email" id="email" name="email" value={formData.email} onChange={handleChange} required />
+
+            <label className={classes.label} htmlFor="password">Hasło:</label>
+            <input className={classes.input} type="password" id="password" name="password" value={formData.password} onChange={handleChange} required />
+
+            <div className={classes.checkboxContainer}>
+              <input type="checkbox" id="terms" name="terms" onChange={() => setTermsAccepted(!termsAccepted)} required />
+              <label htmlFor="terms">Akceptuję regulamin</label>
+            </div>
+
+            <button className={classes.button} type="submit" disabled={!termsAccepted}>Zarejestruj</button>
+          </form>
+        </div>
       </div>
     </div>
   );

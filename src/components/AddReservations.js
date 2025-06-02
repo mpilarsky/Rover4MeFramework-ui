@@ -166,59 +166,61 @@ const AddReservation = () => {
   };
 
   return (
-    <div className={classes.container}>
-      <div className={`${classes.row} ${classes.smallRow}`}>
-        <div className={classes.left}>
-          <Link to="/userDashboard">
-            <img src="/assets/logo.png" alt="Rover4Me" />
-          </Link>
+    <div className={classes.body}>
+      <div className={classes.container}>
+        <div className={`${classes.row} ${classes.smallRow}`}>
+          <div className={classes.left}>
+            <Link to="/userDashboard">
+              <img src="/assets/logo.png" alt="Rover4Me" />
+            </Link>
+          </div>
+          <div className={classes.center}>
+            <h1>Dodaj nową rezerwację</h1>
+          </div>
+          <div className={classes.right}>
+            <Link to="/userDashboard">
+              <button>Wróć do panelu</button>
+            </Link>
+          </div>
         </div>
-        <div className={classes.center}>
-          <h1>Dodaj nową rezerwację</h1>
+
+        <div className={`${classes.row} ${classes.largeRow}`}>
+          <form onSubmit={handleSubmit} className={classes.reservationForm}>
+            <label htmlFor="name">Nazwa:</label>
+            <input type="text" id="name" name="name" value={formData.name} onChange={handleChange} required />
+
+            <label htmlFor="location">Lokalizacja:</label>
+            <input type="text" id="location" name="location" value={formData.location} onChange={handleChange} required />
+
+            <label htmlFor="frame_size">Wielkość ramy:</label>
+            <input type="text" id="frame_size" name="frame_size" value={formData.frame_size} onChange={handleChange} required />
+
+            <label htmlFor="theme">Motyw:</label>
+            <select id="theme" name="theme" value={formData.theme} onChange={handleChange} required>
+              <option value="Damski">Damski</option>
+              <option value="Męski">Męski</option>
+            </select>
+
+            <label htmlFor="date">Data rezerwacji:</label>
+            <input type="date" id="date" name="date" value={formData.date} onChange={handleChange} required />
+
+            <label htmlFor="start_time">Godzina rozpoczęcia:</label>
+            <input type="time" id="start_time" name="start_time" value={formData.start_time} onChange={handleChange} required />
+
+            <label htmlFor="end_time">Godzina zakończenia:</label>
+            <input type="time" id="end_time" name="end_time" value={formData.end_time} onChange={handleChange} required />
+
+            <label htmlFor="bike_type">Typ roweru:</label>
+            <select id="bike_type" name="bike_type" value={formData.bike_type} onChange={handleChange} required>
+              <option value="Górski">Górski</option>
+              <option value="Trekkingowy">Trekkingowy</option>
+              <option value="Miejski">Miejski</option>
+              <option value="Elektryczny">Elektryczny</option>
+            </select>
+
+            <button type="submit">Zapisz</button>
+          </form>
         </div>
-        <div className={classes.right}>
-          <Link to="/userDashboard">
-            <button>Wróć do panelu</button>
-          </Link>
-        </div>
-      </div>
-
-      <div className={`${classes.row} ${classes.largeRow}`}>
-        <form onSubmit={handleSubmit} className={classes.reservationForm}>
-          <label htmlFor="name">Nazwa:</label>
-          <input type="text" id="name" name="name" value={formData.name} onChange={handleChange} required />
-
-          <label htmlFor="location">Lokalizacja:</label>
-          <input type="text" id="location" name="location" value={formData.location} onChange={handleChange} required />
-
-          <label htmlFor="frame_size">Wielkość ramy:</label>
-          <input type="text" id="frame_size" name="frame_size" value={formData.frame_size} onChange={handleChange} required />
-
-          <label htmlFor="theme">Motyw:</label>
-          <select id="theme" name="theme" value={formData.theme} onChange={handleChange} required>
-            <option value="Damski">Damski</option>
-            <option value="Męski">Męski</option>
-          </select>
-
-          <label htmlFor="date">Data rezerwacji:</label>
-          <input type="date" id="date" name="date" value={formData.date} onChange={handleChange} required />
-
-          <label htmlFor="start_time">Godzina rozpoczęcia:</label>
-          <input type="time" id="start_time" name="start_time" value={formData.start_time} onChange={handleChange} required />
-
-          <label htmlFor="end_time">Godzina zakończenia:</label>
-          <input type="time" id="end_time" name="end_time" value={formData.end_time} onChange={handleChange} required />
-
-          <label htmlFor="bike_type">Typ roweru:</label>
-          <select id="bike_type" name="bike_type" value={formData.bike_type} onChange={handleChange} required>
-            <option value="Górski">Górski</option>
-            <option value="Trekkingowy">Trekkingowy</option>
-            <option value="Miejski">Miejski</option>
-            <option value="Elektryczny">Elektryczny</option>
-          </select>
-
-          <button type="submit">Zapisz</button>
-        </form>
       </div>
     </div>
   );

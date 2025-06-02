@@ -185,47 +185,49 @@ function Login() {
   };
 
   return (
-    <div className={classes.container}>
-      <div className={`${classes.row} small`}>
-        <div className="left">
-          <Link to="/">
-            <img src={logo} alt="Rover4Me" />
-          </Link>
+    <div className={classes.body}>
+      <div className={classes.container}>
+        <div className={`${classes.row} small`}>
+          <div className="left">
+            <Link to="/">
+              <img src={logo} alt="Rover4Me" />
+            </Link>
+          </div>
+          <div className="center">
+            <p>Rover4Me to aplikacja, która pozwoli ci na szybkie wynajęcie roweru...</p>
+          </div>
+          <div className="right">
+            <Link to="/signup">
+              <button>Rejestracja</button>
+            </Link>
+          </div>
         </div>
-        <div className="center">
-          <p>Rover4Me to aplikacja, która pozwoli ci na szybkie wynajęcie roweru...</p>
-        </div>
-        <div className="right">
-          <Link to="/signup">
-            <button>Rejestracja</button>
-          </Link>
-        </div>
-      </div>
-      <div className={`${classes.row} large`}>
-        <form className={classes.loginForm} onSubmit={handleSubmit}>
-          <h2>Logowanie</h2>
-          <label htmlFor="email">Login:</label>
-          <input
-            type="text"
-            id="email"
-            name="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
+        <div className={`${classes.row} large`}>
+          <form className={classes.loginForm} onSubmit={handleSubmit}>
+            <h2>Logowanie</h2>
+            <label htmlFor="email">Login:</label>
+            <input
+              type="text"
+              id="email"
+              name="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
 
-          <label htmlFor="password">Hasło:</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
+            <label htmlFor="password">Hasło:</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
 
-          <button type="submit">Zaloguj</button>
-        </form>
+            <button type="submit">Zaloguj</button>
+          </form>
+        </div>
       </div>
     </div>
   );
