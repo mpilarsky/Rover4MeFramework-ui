@@ -176,11 +176,11 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const credentials = { email, password };
-    const success = await loginUser(credentials);
-    if (success) {
+    try {
+      const user = await loginUser(credentials);
       navigate("/userDashboard");
-    } else {
-      alert("Logowanie nieudane");
+    } catch (error) {
+      alert(error.message);
     }
   };
 

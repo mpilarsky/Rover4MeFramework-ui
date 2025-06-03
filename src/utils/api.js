@@ -1,16 +1,4 @@
-const API_BASE_URL = "http://localhost:8000/api";
-
-/**
- * Pobiera listę użytkowników.
- * @returns {Promise<Array>}
- */
-export const getUsers = async () => {
-  const response = await fetch(`${API_BASE_URL}/users`);
-  if (!response.ok) {
-    throw new Error("Błąd pobierania użytkowników");
-  }
-  return response.json();
-};
+const API_BASE_URL = "http://localhost:8000/api/v1";
 
 /**
  * Pobiera listę rezerwacji użytkownika.
@@ -19,7 +7,7 @@ export const getUsers = async () => {
 export const getReservations = async () => {
   const userId = localStorage.getItem("user_id");
   const response = await fetch(`${API_BASE_URL}/reservations?user_id=${userId}`, {
-    credentials: 'include', // <--- to jest kluczowe, żeby backend dostał sesję
+    credentials: 'include',
   });
   if (!response.ok) {
     throw new Error("Błąd pobierania rezerwacji");
@@ -67,7 +55,7 @@ export const loginUser = async (credentials) => {
     throw new Error("Błędne dane logowania");
   }
   const userData = await response.json();
-  localStorage.setItem("user_id", userData.id); // <-- zapisujemy ID użytkownika
+  localStorage.setItem("user_id", userData.id);
   return userData;
 };
 
@@ -77,7 +65,7 @@ export const loginUser = async (credentials) => {
  * @returns {Promise<Object>}
  */
 export const signupUser = async (userData) => {
-  const response = await fetch(`${API_BASE_URL}/signup`, {  // Użycie API_BASE_URL
+  const response = await fetch(`${API_BASE_URL}/signup`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -98,12 +86,12 @@ export const signupUser = async (userData) => {
 export const logoutUser = async () => {
   const response = await fetch(`${API_BASE_URL}/logout`, {
     method: "POST",
-    credentials: "include", // ważne przy użyciu sesji
+    credentials: "include",
   });
 
   if (!response.ok) {
     throw new Error("Błąd podczas wylogowywania");
   }
 
-  localStorage.removeItem("user_id"); // lub cokolwiek trzymasz lokalnie
+  localStorage.removeItem("user_id");
 };

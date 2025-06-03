@@ -142,12 +142,12 @@ const UserDashboard = () => {
       .catch((error) => console.error("Błąd pobierania rezerwacji:", error));
   }, []);
 
-  const navigate = useNavigate(); // z react-router-dom
+  const navigate = useNavigate();
 
   const handleLogout = async () => {
     try {
-      await logoutUser(); // wywołanie fetch na /api/logout
-      navigate("/login"); // przekierowanie po wylogowaniu
+      await logoutUser();
+      navigate("/login");
     } catch (error) {
       console.error("Błąd przy wylogowaniu:", error);
     }
@@ -215,5 +215,4 @@ const UserDashboard = () => {
 };
 
 export default UserDashboard;
-// Note: Ensure that the bike images are named correctly and placed in the assets folder as per the bikeTypeValue mapping.
-// The bike images should be named bike1.png, bike2.png, etc., corresponding to the bike types. 
+ 

@@ -189,17 +189,19 @@ function Signup() {
     setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (termsAccepted) {
-      const success = await signupUser(formData);
-      if (success) {
-        navigate("/login");
-      } else {
-        alert("Rejestracja nieudana");
-      }
-    }
-  };
+const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  if (!termsAccepted) return;
+
+  try {
+    await signupUser(formData);
+    navigate("/login");
+  } catch (error) {
+    alert(error.message);
+  }
+};
+
 
   return (
     <div className={classes.body}>
