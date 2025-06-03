@@ -17,7 +17,8 @@ export const getUsers = async () => {
  * @returns {Promise<Array>}
  */
 export const getReservations = async () => {
-  const response = await fetch(`${API_BASE_URL}/reservations`, {
+  const userId = localStorage.getItem("user_id");
+  const response = await fetch(`${API_BASE_URL}/reservations?user_id=${userId}`, {
     credentials: 'include', // <--- to jest kluczowe, żeby backend dostał sesję
   });
   if (!response.ok) {
